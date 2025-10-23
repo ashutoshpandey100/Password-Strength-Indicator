@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Indicator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="input-box">
+            <input type="password" id="password" placeholder="Enter your password">
+            <button type="submit"><img src="arrow.png"></button>
+        </div>
+        <p id="message">Password is <span id="strength"></span></p>
+    </div>
+
+    <script>
+        var pass = document.getElementById("password");
+        var msg = document.getElementById("message");
+        var str = document.getElementById("strength");
+
+        pass.addEventListener('input', ()=> {
+            let val = pass.value;
+
+            if(val.length === 0){
+                msg.style.display = "none";  // hide message when empty
+                pass.style.borderColor = "#ccc";
+                return;
+            }
+
+            msg.style.display = "block"; // show message when typing
+
+            if(val.length < 4){
+                str.innerHTML = "Weak";
+                pass.style.borderColor = "red";
+                msg.style.color = "red";
+            }
+            else if(val.length >= 4 && val.length < 8){
+                str.innerHTML = "Medium";
+                pass.style.borderColor = "orange";
+                msg.style.color = "orange";
+            }
+            else {
+                str.innerHTML = "Strong";
+                pass.style.borderColor = "green";
+                msg.style.color = "green";
+            }
+        });
+    </script>
+</body>
+</html>
